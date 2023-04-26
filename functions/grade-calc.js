@@ -1,4 +1,4 @@
-let getGrade = function (obtainedMarks, totalMarks) {
+const getGrade = function (obtainedMarks, totalMarks) {
     let percentage = 0
     let letterGrade = ''
     let msg = ''
@@ -24,5 +24,5 @@ let getGrade = function (obtainedMarks, totalMarks) {
 
 }
 
-let displayGrade = getGrade(12, 20)
+const displayGrade = getGrade(12, 20)
 console.log(displayGrade);
