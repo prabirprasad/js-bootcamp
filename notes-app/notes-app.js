@@ -1,3 +1,18 @@
+const notes = [
+    {
+        title: 'My next trip',
+        body: 'I would like to go to Spain'
+    },
+    {
+        title: 'Habbits to work on',
+        body: 'Exercise. Eating a bit better'
+    },
+    {
+        title: 'Office Modification',
+        body: 'Get a new seat'
+    }
+]
+
 // Query and remove
 // const p = document.querySelector('p')
 // p.remove()
@@ -11,3 +26,7 @@ ps.forEach(function (item) {
     // console.log(item.textContent);
     // item.remove()
 })
+
+const newParagraph = document.createElement('p')
+newParagraph.textContent = 'This is a new paragraph'
+document.querySelector('body').appendChild(newParagraph)
