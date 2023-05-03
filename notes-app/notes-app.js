@@ -1,3 +1,21 @@
+// Query and remove
+// const p = document.querySelector('p')
+// p.remove()
+
+// Query all and remove
+
+// const ps = document.querySelectorAll('p')
+
+// ps.forEach(function (item) {
+//     item.textContent = '*****'
+//     // console.log(item.textContent);
+//     // item.remove()
+// })
+
+// const newParagraph = document.createElement('p')
+// newParagraph.textContent = 'This is a new paragraph'
+// document.querySelector('body').appendChild(newParagraph)
+
 const notes = [
     {
         title: 'My next trip',
@@ -13,20 +31,37 @@ const notes = [
     }
 ]
 
-// Query and remove
-// const p = document.querySelector('p')
-// p.remove()
+const filters = {
+    searchText: ''
+}
 
-// Query all and remove
+const renderNotes = function (notes, filters) {
+    const filteredNotes = notes.filter(function (note) {
+        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
 
-const ps = document.querySelectorAll('p')
+    document.querySelector('#notes').innerHTML = ''
+    
+    filteredNotes.forEach(function (note) {
+        const noteElement = document.createElement('p')
+        noteElement.textContent = note.title
+        document.querySelector('#notes').append(noteElement)
+    })
+}
 
-ps.forEach(function (item) {
-    item.textContent = '*****'
-    // console.log(item.textContent);
-    // item.remove()
+renderNotes(notes, filters)
+
+document.querySelector('#create-note').addEventListener('click', function (e) {
+    e.target.textContent = 'Button was clicked'  
 })
 
-const newParagraph = document.createElement('p')
-newParagraph.textContent = 'This is a new paragraph'
-document.querySelector('body').appendChild(newParagraph)
+document.querySelector('#remove-all').addEventListener('click', function () {
+    document.querySelectorAll('.note').forEach(function (note) {
+        note.remove()
+    })
+})
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    filters.searchText = e.target.value
+    renderNotes(notes, filters)
+})
