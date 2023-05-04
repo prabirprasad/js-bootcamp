@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-    </head>
-    <body>
-        <h1>TODO</h1>
-        <input type="text" id="new-todo-text" placeholder="Type your todo here">
-        <button id="add-todo">Add Todo</button>
-        <input type="text" id="search-text" placeholder="Filter todos">
-        <div id="todos"></div>
-        <script src="todo-app.js"></script>
-    </body>
+
+<head>
+
+</head>
+
+<body>
+    <h1>TODO</h1>
+    <label>
+        Search: <input type="text" id="search-text" placeholder="Filter todos">
+    </label>
+    <label>
+        <input id="hide-completed" type="checkbox"> Hide Completed
+    </label>
+    <div id="todos"></div>
+    <form id="todo-form">
+        <label>
+            Todo: <input type="text" name="todoText" placeholder="Enter your task to do">
+        </label>
+        <button>Submit</button>
+    </form>
+    <script src="todo-app.js"></script>
+</body>
+
 </html>

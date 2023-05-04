@@ -30,12 +30,15 @@ const todos = [
 ]
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    hideCompleted: false
 }
 
 const renderTodos = function (todos, filters) {
     const filteredTodos = todos.filter(function (todo) {
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        const hideCompletedMatch = !filters.hideCompleted || !todo.completed
+        return searchTextMatch && hideCompletedMatch
     })
 
     const incompleteTodos = filteredTodos.filter(function (item) {
@@ -57,17 +60,24 @@ const renderTodos = function (todos, filters) {
 
 renderTodos(todos, filters)
 
-// Listen for new todo creation
-document.querySelector('#add-todo').addEventListener('click', function (e) {
-   e.target.textContent = 'Change'
-})
-
-// Listen for todo text change
-document.querySelector('#new-todo-text').addEventListener('input', function (e) {
-    console.log(e.target.value);
-})
-
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value
+    renderTodos(todos, filters)
+})
+
+document.querySelector('#todo-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    todos.push({
+        text: e.target.elements.todoText.value,
+        completed: false
+    })
+    
+    renderTodos(todos, filters)
+
+    e.target.elements.todoText.value = ''
+})
+
+document.querySelector('#hide-completed').addEventListener('change', function (e) {
+    filters.hideCompleted = e.target.checked
     renderTodos(todos, filters)
 })
