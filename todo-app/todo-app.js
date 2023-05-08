@@ -6,28 +6,36 @@
 //     }
 // })
 
-const todos = [
-    {
-        text: 'Clean the kitchen',
-        completed: true
-    },
-    {
-        text: 'Book flights',
-        completed: false
-    },
-    {
-        text: 'Research museum',
-        completed: false
-    },
-    {
-        text: 'Walk the dog',
-        completed: true
-    },
-    {
-        text: 'Finish this course!',
-        completed: false
-    }
-]
+// const todos = [
+//     {
+//         text: 'Clean the kitchen',
+//         completed: true
+//     },
+//     {
+//         text: 'Book flights',
+//         completed: false
+//     },
+//     {
+//         text: 'Research museum',
+//         completed: false
+//     },
+//     {
+//         text: 'Walk the dog',
+//         completed: true
+//     },
+//     {
+//         text: 'Finish this course!',
+//         completed: false
+//     }
+// ]
+
+let todos = []
+
+const todosJSON = localStorage.getItem('todos')
+
+if (todosJSON !== null) {
+    todos = JSON.parse(todosJSON)
+}
 
 const filters = {
     searchText: '',
@@ -71,6 +79,8 @@ document.querySelector('#todo-form').addEventListener('submit', function (e) {
         text: e.target.elements.todoText.value,
         completed: false
     })
+
+    localStorage.setItem('todos', JSON.stringify(todos))
     
     renderTodos(todos, filters)
 
