@@ -1,3 +1,4 @@
+// Fetching existing todos from local storage
 const getSavedTodos = function () {
     const todosJSON = localStorage.getItem('todos')
 
@@ -8,8 +9,20 @@ const getSavedTodos = function () {
     }
 }
 
+// Save todo to local storage
 const saveTodo = function (todos) {
     localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+//  Toogle the completed value for a given todo
+const toggleTodo = function (id) {
+    const todo = todos.find(function (todo) {
+        return todo.id === id
+    })
+
+    if (todo !== undefined) {
+       todo.completed = !todo.completed
+    }
 }
 
 //  Remove todo by id
@@ -31,7 +44,13 @@ const generateDOM = function (todo) {
 
     //  Setup todo checkbox
     checkboxElement.setAttribute('type', 'checkbox')
+    checkboxElement.checked = todo.completed
     todoElement.appendChild(checkboxElement)
+    checkboxElement.addEventListener('change', function () {
+        toggleTodo(todo.id)
+        saveTodo(todos)
+        renderTodos(todos, filters)
+    })
 
     //  Setup the todo text
     textElement.textContent = todo.text
