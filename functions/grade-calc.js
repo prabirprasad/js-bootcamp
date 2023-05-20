@@ -1,22 +1,27 @@
 const getGrade = function (obtainedMarks, totalMarks) {
-    let percentage = 0
-    let letterGrade = ''
+    if (typeof obtainedMarks !== 'number' || typeof totalMarks !== 'number') {
+        throw Error('Please provide only numbers')
+    }
+
     let msg = ''
-    if(obtainedMarks > totalMarks) {
+    
+    if (obtainedMarks > totalMarks) {
         msg = `Obtained marks ${obtainedMarks} cannot be greater than Total marks ${totalMarks}`
     } else {
-        percentage = (obtainedMarks /totalMarks) * 100
-        if(percentage >= 90 && percentage <= 100) {
+        const percentage = (obtainedMarks / totalMarks) * 100
+        let letterGrade = ''
+
+        if (percentage >= 90 && percentage <= 100) {
             letterGrade = 'A'
-        } else if(percentage >= 80) {
+        } else if (percentage >= 80) {
             letterGrade = 'B'
-        } else if(percentage >= 70) {
+        } else if (percentage >= 70) {
             letterGrade = 'C'
-        } else if(percentage >= 60) {
+        } else if (percentage >= 60) {
             letterGrade = 'D'
         } else {
             letterGrade = 'F'
-        } 
+        }
         msg = `You got a ${letterGrade} (${percentage}%)`
     }
 
@@ -24,5 +29,9 @@ const getGrade = function (obtainedMarks, totalMarks) {
 
 }
 
-const displayGrade = getGrade(12, 20)
-console.log(displayGrade);
+try {
+    const displayGrade = getGrade(9, 20)
+    console.log(displayGrade);
+} catch (e) {
+    console.log(e.message);
+}
